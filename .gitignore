@@ -44,3 +44,10 @@ yarn-error.log*
 # Miscellaneous
 /.eslintcache
 /.yarn-integrity
+
+# Firebase
+.firebaserc
+firebase.json
+.firebase/
+
+public/
