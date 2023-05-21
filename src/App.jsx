@@ -1,8 +1,10 @@
 import React from 'react'
 
 function App() {
+  const [currentValue, setCurrentValue] = React.useState(0)
+
   const handleClear = () => {
-    console.log('clear')
+    setCurrentValue(0)
   }
   const handleSign = () => {
     console.log('sign')
@@ -10,8 +12,8 @@ function App() {
   const handleOperation = () => {
     console.log('operation')
   }
-  const handleNumber = () => {
-    console.log('number')
+  const handleNumber = (number) => {
+    setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
   }
   const handleDecimal = () => {
     console.log('decimal')
@@ -22,7 +24,7 @@ function App() {
 
   return (
     <div className="calculator">
-      <div className="display">0</div>
+      <div className="display">{currentValue}</div>
       <div className="buttons">
         <button
           type="button"
@@ -44,7 +46,7 @@ function App() {
           type="button"
           value="mod"
           className="mod"
-          onClick={handleOperation}
+          onClick={() => handleOperation('mod')}
         >
           MOD
         </button>
@@ -52,7 +54,7 @@ function App() {
           type="button"
           value="division"
           className="operation"
-          onClick={handleOperation}
+          onClick={() => handleOperation('division')}
         >
           /
         </button>
@@ -60,7 +62,7 @@ function App() {
           type="button"
           value="7"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('7')}
         >
           7
         </button>
@@ -68,7 +70,7 @@ function App() {
           type="button"
           value="8"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('8')}
         >
           8
         </button>
@@ -76,15 +78,15 @@ function App() {
           type="button"
           value="9"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('9')}
         >
           9
         </button>
         <button
           type="button"
-          value="x"
+          value="multiplication"
           className="operation"
-          onClick={handleOperation}
+          onClick={() => handleOperation('multiplication')}
         >
           x
         </button>
@@ -92,7 +94,7 @@ function App() {
           type="button"
           value="4"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('4')}
         >
           4
         </button>
@@ -100,7 +102,7 @@ function App() {
           type="button"
           value="5"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('5')}
         >
           5
         </button>
@@ -108,15 +110,15 @@ function App() {
           type="button"
           value="6"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('6')}
         >
           6
         </button>
         <button
           type="button"
-          value="-"
+          value="subtraction"
           className="operation"
-          onClick={handleOperation}
+          onClick={() => handleOperation('subtraction')}
         >
           -
         </button>
@@ -124,7 +126,7 @@ function App() {
           type="button"
           value="1"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('1')}
         >
           1
         </button>
@@ -132,7 +134,7 @@ function App() {
           type="button"
           value="2"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('2')}
         >
           2
         </button>
@@ -140,15 +142,15 @@ function App() {
           type="button"
           value="3"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('3')}
         >
           3
         </button>
         <button
           type="button"
-          value="+"
+          value="addition"
           className="operation"
-          onClick={handleOperation}
+          onClick={() => handleOperation('addition')}
         >
           +
         </button>
@@ -156,7 +158,7 @@ function App() {
           type="button"
           value="0"
           className="number"
-          onClick={handleNumber}
+          onClick={() => handleNumber('0')}
         >
           0
         </button>
