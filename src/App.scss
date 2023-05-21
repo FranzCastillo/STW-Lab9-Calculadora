@@ -1,3 +1,18 @@
-h1 {
-  color: red;
+body{
+  .calculator{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .display{
+
+    }
+    .buttons{
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+  }
 }

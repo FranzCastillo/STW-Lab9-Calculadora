@@ -1,8 +1,10 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import "./App.scss";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+// eslint-disable-next-line import/extensions
+import App from './App.jsx'
+import './App.scss'
 
-const el = document.getElementById("app");
+const el = document.getElementById('app')
 
-ReactDOM.createRoot(el).render(<App />);
+// eslint-disable-next-line react/jsx-filename-extension
+ReactDOM.createRoot(el).render(<App />)

@@ -1,7 +1,184 @@
 import React from 'react'
 
 function App() {
-  return <h1>Hello React</h1>
+  const handleClear = () => {
+    console.log('clear')
+  }
+  const handleSign = () => {
+    console.log('sign')
+  }
+  const handleOperation = () => {
+    console.log('operation')
+  }
+  const handleNumber = () => {
+    console.log('number')
+  }
+  const handleDecimal = () => {
+    console.log('decimal')
+  }
+  const handleEquals = () => {
+    console.log('equals')
+  }
+
+  return (
+    <div className="calculator">
+      <div className="display">0</div>
+      <div className="buttons">
+        <button
+          type="button"
+          value="clear"
+          className="clear"
+          onClick={handleClear}
+        >
+          C
+        </button>
+        <button
+          type="button"
+          value="sign"
+          className="sign"
+          onClick={handleSign}
+        >
+          +/-
+        </button>
+        <button
+          type="button"
+          value="mod"
+          className="mod"
+          onClick={handleOperation}
+        >
+          MOD
+        </button>
+        <button
+          type="button"
+          value="division"
+          className="operation"
+          onClick={handleOperation}
+        >
+          /
+        </button>
+        <button
+          type="button"
+          value="7"
+          className="number"
+          onClick={handleNumber}
+        >
+          7
+        </button>
+        <button
+          type="button"
+          value="8"
+          className="number"
+          onClick={handleNumber}
+        >
+          8
+        </button>
+        <button
+          type="button"
+          value="9"
+          className="number"
+          onClick={handleNumber}
+        >
+          9
+        </button>
+        <button
+          type="button"
+          value="x"
+          className="operation"
+          onClick={handleOperation}
+        >
+          x
+        </button>
+        <button
+          type="button"
+          value="4"
+          className="number"
+          onClick={handleNumber}
+        >
+          4
+        </button>
+        <button
+          type="button"
+          value="5"
+          className="number"
+          onClick={handleNumber}
+        >
+          5
+        </button>
+        <button
+          type="button"
+          value="6"
+          className="number"
+          onClick={handleNumber}
+        >
+          6
+        </button>
+        <button
+          type="button"
+          value="-"
+          className="operation"
+          onClick={handleOperation}
+        >
+          -
+        </button>
+        <button
+          type="button"
+          value="1"
+          className="number"
+          onClick={handleNumber}
+        >
+          1
+        </button>
+        <button
+          type="button"
+          value="2"
+          className="number"
+          onClick={handleNumber}
+        >
+          2
+        </button>
+        <button
+          type="button"
+          value="3"
+          className="number"
+          onClick={handleNumber}
+        >
+          3
+        </button>
+        <button
+          type="button"
+          value="+"
+          className="operation"
+          onClick={handleOperation}
+        >
+          +
+        </button>
+        <button
+          type="button"
+          value="0"
+          className="number"
+          onClick={handleNumber}
+        >
+          0
+        </button>
+        <button
+          type="button"
+          value="."
+          className="number"
+          onClick={handleDecimal}
+        >
+          .
+        </button>
+        <button
+          type="button"
+          value="="
+          className="number"
+          onClick={handleEquals}
+        >
+          =
+        </button>
+      </div>
+    </div>
+  )
 }
 
 export default App
