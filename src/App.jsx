@@ -68,11 +68,7 @@ function App() {
     if (!operation) return // Do nothing if there hasn't been an operation
     let result
     if (lastPressedEquals) {
-      if (operation === 'subtraction' || operation === 'division') {
-        result = operate(operation, Number(lastValue), Number(lastUsedValue))
-      } else {
-        result = operate(operation, Number(lastUsedValue), Number(lastValue))
-      }
+      result = operate(operation, Number(lastValue), Number(lastUsedValue))
     } else {
       result = operate(operation, Number(lastValue), Number(currentValue))
       setLastUsedValue(currentValue)
