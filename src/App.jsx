@@ -115,9 +115,21 @@ function App() {
     }
   }
 
+  function formatNumber(number) {
+    let formattedNumber = number
+    if (number.toString().length > 9) {
+      const roundedNumber = Number(number.toFixed(9))
+      formattedNumber = roundedNumber.toString().slice(0, 9)
+    }
+    if (number > 999999999) {
+      formattedNumber = 'ERROR'
+    }
+    return formattedNumber.toString()
+  }
+
   return (
     <div className="calculator">
-      <div className="display">{currentValue}</div>
+      <div className="display">{formatNumber(currentValue)}</div>
       <div className="buttons">
         <button
           type="button"
