@@ -93,7 +93,7 @@ function App() {
       setLastValue(currentValue)
       setCurrentValue(0)
     } else if (isChain) { // If it's a chain operation
-      setLastValue(currentValue)
+      setCurrentValue(0)
     } else { // If it's a new operation (called if there is a second value)
       handleEquals()
     }
