@@ -4,6 +4,7 @@ function App() {
   const [currentValue, setCurrentValue] = React.useState(0)
   const [lastValue, setLastValue] = React.useState(null)
   const [operation, setOperation] = React.useState('')
+  const [isChain, setIsChain] = React.useState(false)
 
   const isLengthValid = () => currentValue.toString().length < 9
 
@@ -11,6 +12,7 @@ function App() {
     setCurrentValue(0)
     setLastValue(null)
     setOperation('')
+    setIsChain(false)
   }
   const handleSign = () => {
     if (isLengthValid()) {
@@ -43,6 +45,7 @@ function App() {
     const result = operate(operation, Number(lastValue), Number(currentValue))
     setCurrentValue(result)
     setLastValue(result)
+    setIsChain(true)
   }
 
   const handleOperation = (operationPressed) => {
@@ -50,13 +53,21 @@ function App() {
     if (!lastValue) {
       setLastValue(currentValue)
       setCurrentValue(0)
+    } else if (isChain) {
+      setLastValue(currentValue)
     } else {
       handleEquals()
     }
   }
   const handleNumber = (number) => {
     if (isLengthValid()) {
-      setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
+      if (isChain) {
+        setCurrentValue(number)
+        setIsChain(false)
+        // setOperation('')
+      } else {
+        setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
+      }
     }
   }
 
