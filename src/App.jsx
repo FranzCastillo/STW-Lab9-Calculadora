@@ -2,23 +2,19 @@ import React from 'react'
 
 function App() {
   const [currentValue, setCurrentValue] = React.useState(0)
+  const [lastValue, setLastValue] = React.useState(null)
+  const [operation, setOperation] = React.useState('')
 
   const isLengthValid = () => currentValue.toString().length < 9
 
   const handleClear = () => {
     setCurrentValue(0)
+    setLastValue(null)
+    setOperation('')
   }
   const handleSign = () => {
     if (isLengthValid()) {
       setCurrentValue((prevValue) => prevValue * -1)
-    }
-  }
-  const handleOperation = () => {
-    console.log('operation')
-  }
-  const handleNumber = (number) => {
-    if (isLengthValid()) {
-      setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
     }
   }
   const handleDecimal = () => {
@@ -26,8 +22,42 @@ function App() {
       setCurrentValue((prevValue) => (prevValue.includes('.') ? prevValue : `${prevValue}.`))
     }
   }
+  const operate = (operationPassed, a, b) => {
+    switch (operationPassed) {
+      case 'addition':
+        return a + b
+      case 'subtraction':
+        return a - b
+      case 'multiplication':
+        return a * b
+      case 'division':
+        return a / b
+      case 'mod':
+        return a % b
+      default:
+        return 0
+    }
+  }
   const handleEquals = () => {
-    console.log('equals')
+    if (!operation) return
+    const result = operate(operation, Number(lastValue), Number(currentValue))
+    setCurrentValue(result)
+    setLastValue(result)
+  }
+
+  const handleOperation = (operationPressed) => {
+    setOperation(operationPressed)
+    if (!lastValue) {
+      setLastValue(currentValue)
+      setCurrentValue(0)
+    } else {
+      handleEquals()
+    }
+  }
+  const handleNumber = (number) => {
+    if (isLengthValid()) {
+      setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
+    }
   }
 
   return (
