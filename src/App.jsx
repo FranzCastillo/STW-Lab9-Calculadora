@@ -153,7 +153,7 @@ function App() {
           className="mod"
           onClick={() => handleOperation('mod')}
         >
-          MOD
+          %
         </button>
         <button
           type="button"
@@ -278,7 +278,7 @@ function App() {
         <button
           type="button"
           value="="
-          className="number"
+          className="equals"
           onClick={handleEquals}
         >
           =
