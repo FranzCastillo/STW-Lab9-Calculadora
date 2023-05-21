@@ -3,20 +3,28 @@ import React from 'react'
 function App() {
   const [currentValue, setCurrentValue] = React.useState(0)
 
+  const isLengthValid = () => currentValue.toString().length < 9
+
   const handleClear = () => {
     setCurrentValue(0)
   }
   const handleSign = () => {
-    console.log('sign')
+    if (isLengthValid()) {
+      setCurrentValue((prevValue) => prevValue * -1)
+    }
   }
   const handleOperation = () => {
     console.log('operation')
   }
   const handleNumber = (number) => {
-    setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
+    if (isLengthValid()) {
+      setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
+    }
   }
   const handleDecimal = () => {
-    console.log('decimal')
+    if (isLengthValid()) {
+      setCurrentValue((prevValue) => (prevValue.includes('.') ? prevValue : `${prevValue}.`))
+    }
   }
   const handleEquals = () => {
     console.log('equals')
