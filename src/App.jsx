@@ -121,7 +121,7 @@ function App() {
       const roundedNumber = Number(number.toFixed(9))
       formattedNumber = roundedNumber.toString().slice(0, 9)
     }
-    if (number > 999999999) {
+    if (number > 999999999 || number < -999999999) {
       formattedNumber = 'ERROR'
     }
     return formattedNumber.toString()
