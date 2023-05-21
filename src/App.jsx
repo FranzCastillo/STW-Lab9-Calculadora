@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function App() {
-  const [currentValue, setCurrentValue] = React.useState(0)
-  const [lastValue, setLastValue] = React.useState(null)
-  const [operation, setOperation] = React.useState('')
-  const [isChain, setIsChain] = React.useState(false)
+  const [currentValue, setCurrentValue] = useState(0) // The current value displayed
+  const [lastValue, setLastValue] = useState(null) // The last stored value
+  const [operation, setOperation] = useState('') // The operation to be performed
+  const [isChain, setIsChain] = useState(false) // Checks if there's a chain operation
+  const [lastPressedEquals, setLastPressedEquals] = useState(false)// Last button pressed was equals
+  const [lastUsedValue, setLastUsedValue] = useState(0) // Last value used when pressing equals
 
   /**
    * Checks if the current value is less than 9 characters
@@ -20,6 +22,8 @@ function App() {
     setLastValue(null)
     setOperation('')
     setIsChain(false)
+    setLastPressedEquals(false)
+    setLastUsedValue(null)
   }
   /**
    * Changes the sign of the current value
@@ -62,10 +66,24 @@ function App() {
   }
   const handleEquals = () => {
     if (!operation) return // Do nothing if there hasn't been an operation
-    const result = operate(operation, Number(lastValue), Number(currentValue))
+    let result
+    if (lastPressedEquals) {
+      if (operation === 'subtraction' || operation === 'division') {
+        result = operate(operation, Number(lastValue), Number(lastUsedValue))
+      } else {
+        result = operate(operation, Number(lastUsedValue), Number(lastValue))
+      }
+    } else {
+      result = operate(operation, Number(lastValue), Number(currentValue))
+      setLastUsedValue(currentValue)
+    }
+    if (Number.isNaN(result) || result === Infinity) {
+      result = 'ERROR'
+    }
     setCurrentValue(result)
     setLastValue(result)
     setIsChain(true)
+    setLastPressedEquals(true)
   }
 
   /**
@@ -74,6 +92,7 @@ function App() {
    */
   const handleOperation = (operationPressed) => {
     setOperation(operationPressed)
+    setLastPressedEquals(false)
     if (!lastValue) { // If it's the first operation
       setLastValue(currentValue)
       setCurrentValue(0)
@@ -85,6 +104,7 @@ function App() {
   }
   const handleNumber = (number) => {
     if (isLengthValid()) {
+      setLastPressedEquals(false)
       if (isChain) { // Checks if it is a result of a chain operation and resets the display
         setCurrentValue(number)
         setIsChain(false)
