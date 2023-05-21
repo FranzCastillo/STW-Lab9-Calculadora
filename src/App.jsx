@@ -6,24 +6,44 @@ function App() {
   const [operation, setOperation] = React.useState('')
   const [isChain, setIsChain] = React.useState(false)
 
+  /**
+   * Checks if the current value is less than 9 characters
+   * @returns {boolean}
+   */
   const isLengthValid = () => currentValue.toString().length < 9
 
+  /**
+   * Clears the calculator and its memory
+   */
   const handleClear = () => {
     setCurrentValue(0)
     setLastValue(null)
     setOperation('')
     setIsChain(false)
   }
+  /**
+   * Changes the sign of the current value
+   */
   const handleSign = () => {
     if (isLengthValid()) {
       setCurrentValue((prevValue) => prevValue * -1)
     }
   }
+  /**
+   * Adds a decimal to the current value
+   */
   const handleDecimal = () => {
     if (isLengthValid()) {
       setCurrentValue((prevValue) => (prevValue.includes('.') ? prevValue : `${prevValue}.`))
     }
   }
+  /**
+   * Performs the operation passed
+   * @param operationPassed
+   * @param a
+   * @param b
+   * @returns {number|*}
+   */
   const operate = (operationPassed, a, b) => {
     switch (operationPassed) {
       case 'addition':
@@ -41,31 +61,35 @@ function App() {
     }
   }
   const handleEquals = () => {
-    if (!operation) return
+    if (!operation) return // Do nothing if there hasn't been an operation
     const result = operate(operation, Number(lastValue), Number(currentValue))
     setCurrentValue(result)
     setLastValue(result)
     setIsChain(true)
   }
 
+  /**
+   * Handles the operation passed
+   * @param operationPressed
+   */
   const handleOperation = (operationPressed) => {
     setOperation(operationPressed)
-    if (!lastValue) {
+    if (!lastValue) { // If it's the first operation
       setLastValue(currentValue)
       setCurrentValue(0)
-    } else if (isChain) {
+    } else if (isChain) { // If it's a chain operation
       setLastValue(currentValue)
-    } else {
+    } else { // If it's a new operation (called if there is a second value)
       handleEquals()
     }
   }
   const handleNumber = (number) => {
     if (isLengthValid()) {
-      if (isChain) {
+      if (isChain) { // Checks if it is a result of a chain operation and resets the display
         setCurrentValue(number)
         setIsChain(false)
         // setOperation('')
-      } else {
+      } else { // If it's a new number
         setCurrentValue((prevValue) => (prevValue === 0 ? number : prevValue + number))
       }
     }
